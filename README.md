@@ -1,6 +1,6 @@
 # 🍕 Fast React Pizza Co.
 
-A simple React application that displays a pizza restaurant menu.  
+A simple React application using CRA(create react app) that displays a pizza restaurant menu.  
 It demonstrates **React components**, **props**, **conditional rendering**, and **styling with CSS**.
 
 ---
