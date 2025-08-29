@@ -54,29 +54,25 @@ function App() {
 }
 function Pizza(probs) {
   return (
-    <div className="pizza">
-      <img src={probs.img} alt={probs.name} />
+    <li className="pizza">
+      <img src={probs.pizzaObj.photoName} alt={probs.pizzaObj.name} />
       <div>
-        <h3>{probs.name}</h3>
-        <p>{probs.ingredients}</p>
-        <span>{probs.price}</span>
+        <h3>{probs.pizzaObj.name}</h3>
+        <p>{probs.pizzaObj.ingredients}</p>
+        <span>{probs.pizzaObj.price}</span>
       </div>
-    </div>
+    </li>
   );
 }
 function Menu() {
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      {pizzaData.map((pizza) => (
-        <Pizza
-          name={pizza.name}
-          ingredients={pizza.ingredients}
-          price={pizza.price}
-          img={pizza.photoName}
-          available={!pizza.soldOut}
-        />
-      ))}
+      <ul className="pizzas">
+        {pizzaData.map((pizza) => (
+          <Pizza pizzaObj={pizza} />
+        ))}
+      </ul>
     </main>
   );
 }
@@ -98,12 +94,20 @@ function Footer() {
     minute: "2-digit",
   }).format(new Date());
   let currH = new Date().getHours();
+  let isOpen = currH > openH && currH < closeH;
   return (
     <footer className="footer">
-      {Time}{" "}
-      {currH > openH && currH < closeH
-        ? `- We're currently open!`
-        : `We're closed!`}
+      {isOpen ? (
+        <div className="order">
+          <p>
+            - We're currently open till {`${closeH}:00 `}! Come visit us or
+            Order Online!
+          </p>
+          <button className="btn">Order</button>
+        </div>
+      ) : (
+        <p>We're closed!</p>
+      )}
     </footer>
   );
 }
